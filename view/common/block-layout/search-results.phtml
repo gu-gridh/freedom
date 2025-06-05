@@ -37,28 +37,32 @@ $langValue = $filterLocale ? [$lang, ''] : null;
 $untitled = $translate('[Untitled]');
 $siteSlug = $site->slug();
 
+$layout = $_GET['layout'] ?? 'grid';
 // $totalCount = $this->pagination()->getPaginator()->getTotalCount();
 ?>
 
 <?php // This block uses two div by default to comply with common themes. ?>
 
-<?php if ($showSearchForm): ?>
-<div class="block search-form-block">
-    <form id="search-form">
-        <input type="text" name="search" value="<?= $escapeAttr($query['search']) ?>" placeholder="<?= $translate('Search') ?>">
-        <button type="submit" class="button"><?= $translate('Search') ?></button>
-    </form>
-</div>
-<?php endif; ?>
 
 <div class="search-results-block">
-    <?php if (!empty($sortHeadings)): ?>
-    <div class="browse-controls">
-        <?= $this->sortSelector($sortHeadings) ?>
-    </div>
-    <?php endif; ?>
 
-    <ul class="resource-list preview">
+    <div class="browse-controls">          
+        <a href="?layout=grid" aria-label="<?php echo $translate('Grid'); ?>" class="<?= $layout === 'grid' ? 'active' : '' ?> icon-btn o-icon-grid"></a>
+        <a href="?layout=list" aria-label="<?php echo $translate('List'); ?>" class="<?= $layout === 'list' ? 'active' : '' ?> icon-btn o-icon-list"></a>
+        <?php if ($showSearchForm): ?>
+            <div class="search-form-block">
+                <form id="search-form">
+            <input type="text" name="search" value="<?= $escapeAttr($query['search']) ?>" placeholder="<?= $translate('Search') ?>">
+            <button type="submit" class="button"><?= $translate('Search') ?></button>
+                </form>
+            </div>
+        <?php endif; ?>
+        <?php if (!empty($sortHeadings)): ?>
+            <?= $this->sortSelector($sortHeadings) ?>
+        <?php endif; ?>
+    </div>
+
+    <ul class="resource-list preview <?= $layout ?>">
     <?php
     $heading = '';
     $body = '';
