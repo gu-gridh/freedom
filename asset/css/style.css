@@ -466,7 +466,7 @@ embed, iframe, object {
 
 img {
     height: auto;
-    max-width: 100%
+    max-width: 400px
 }
 
 figure {
@@ -3737,6 +3737,60 @@ body.search .results .resource__content {
     font-size: 16px;
     line-height: 0.8 !important;
 }
+
+/* Make the metadata area a 2-column grid: image(s) on the left, all DLs on the right */
+.main-region .metadata {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 1rem;
+}
+
+/* Put the media embeds (your images) in the first column */
+.main-region .metadata > .media-embeds {
+  grid-column: 1;
+}
+
+/* Put every DL (Titel, Nummer, Är del av, etc) in the second column */
+.main-region .metadata > dl {
+  grid-column: 2;
+  /* Optional: align all your DLs to the top of the image */
+  align-self: start;
+}
+
+/* If you have any other direct children you want in column 2 (like site-pages or media-list),
+   add them here: */
+.main-region .metadata > .site-pages,
+.main-region .metadata > .media-list {
+  grid-column: 2;
+}
+
+/* Make sure images don’t overflow their grid cell */
+.main-region .metadata .media-embeds img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+/* Let the “Sidor på webbplatsen” DL span the full width under the image+metadata row */
+.main-region .metadata {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 1rem;
+}
+
+
+/* .site-pages spans full width below */
+.main-region .metadata > .site-pages {
+  grid-column: 1 / -1;
+  margin-top: 2rem;  /* optional spacing */
+}
+
+/* .media-list also spans full width below */
+.main-region .metadata > .media-list {
+  grid-column: 1 / -1;
+  margin-top: 2rem;  /* match the spacing you like */
+}
+
+
 
 
 @media screen and (max-width: 640px) {
