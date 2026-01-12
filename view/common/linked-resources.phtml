@@ -109,7 +109,7 @@ $resourcePropertiesSelect->setValueOptions($valueOptions);
               try {
                   $raw = $resource->value('bibo:edition');
                   if ($raw) {
-                      $editionText = $this->escapeHtml((string) $raw);
+                      // deleted edition number formatting
                   }
               } catch (\Throwable $e) {
                   // No edition, ignore.
@@ -121,9 +121,7 @@ $resourcePropertiesSelect->setValueOptions($valueOptions);
               <?php
               // 3) Render the linkPretty() and optional edition
               echo $resource->linkPretty('square', null, null, null, $valueLang);
-              if ($editionText !== '') {
-                  echo ' <em>(' . $editionText . ')</em>';
-              }
+              
               ?>
             </span>
             <?php echo $this->ResourceTags($resource); ?>
