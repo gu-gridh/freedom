@@ -935,7 +935,7 @@ body.main-header--center {
 
 .container {
     width: 100%;
-    max-width: none !important;
+    max-width: 1440px;
     margin-left: auto;
     margin-right: auto;
     padding: 0 15px
@@ -3790,13 +3790,7 @@ body.search .results .resource__content {
   margin-top: 2rem;  /* match the spacing you like */
 }
 
-.container {
-    width: 100%;
-    max-width: none !important;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 15px
-}
+
 
 
 @media screen and (max-width: 640px) {
