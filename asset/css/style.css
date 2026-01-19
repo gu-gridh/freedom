@@ -3817,6 +3817,7 @@ body{ padding-bottom: var(--footer-height); }
 .main-footer__bottom,
 .main-footer__bottom-container{
   width: 100%;
+  padding: 0px;
 }
 
 .main-footer__bottom-container{
@@ -3874,12 +3875,12 @@ body{ padding-bottom: var(--footer-height); }
 .footer-partners a{
   color: rgba(255,255,255,0.95);
   text-decoration: none;
-  font-weight: 700;
-  font-size: 14px;
+  font-weight: 400;
+  font-size: 24px;
 }
 
 .footer-partners .pipe{
-  color: rgba(255,255,255,0.35);
+  font-size: 24px;
 }
 
 /* mobile: let it wrap and increase footer height */
