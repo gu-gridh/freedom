@@ -3790,7 +3790,141 @@ body.search .results .resource__content {
   margin-top: 2rem;  /* match the spacing you like */
 }
 
+/* === Footer: fixed & style === */
 
+/* footer height variable (adjust if needed) */
+:root {
+  --footer-height: 76px;
+  --footer-bg: #7b2b2b;     /* maroon / primary background */
+  --footer-text: #ffffff;   /* white text */
+  --footer-link-color: rgba(255,255,255,0.95);
+}
+
+/* Make footer fixed at bottom */
+.main-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--footer-height);
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  z-index: 9999;
+  box-shadow: 0 -1px 0 rgba(0,0,0,0.06);
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+  margin: 0;
+}
+
+/* Ensure page content isn't hidden behind footer */
+body {
+  padding-bottom: var(--footer-height);
+}
+
+/* inner container (keeps same container width as theme) */
+.main-footer__bottom-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 24px; /* small horizontal padding */
+  gap: 18px;
+}
+
+/* Left: two stacked link columns */
+.main-footer__left {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  flex: 0 0 auto; /* shrink to content */
+}
+
+/* Each column list */
+.footer-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.footer-links--col li {
+  margin: 0;
+  padding: 6px 0;
+}
+
+.footer-links--col li a {
+  color: var(--footer-link-color);
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 1;
+  display: inline-block;
+  opacity: 0.95;
+}
+
+.footer-links--col li a:hover {
+  text-decoration: underline;
+}
+
+/* Center: big brand text centered vertically */
+.main-footer__center {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+}
+
+.footer-brand__text{
+  color: #fff;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+/* Right: partner links */
+.main-footer__right {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-partners a {
+  color: var(--footer-link-color);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 4px 8px;
+}
+
+.footer-partners .pipe {
+  color: rgba(255,255,255,0.35);
+  margin: 0 4px;
+}
+
+/* small-screen adjustments: stack items and make footer taller */
+@media (max-width: 820px) {
+  :root { --footer-height: 120px; } /* let it be taller on mobile */
+  .main-footer {
+    height: var(--footer-height);
+    align-items: center;
+  }
+
+  .main-footer__bottom-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 8px 16px;
+  }
+
+  .main-footer__left {
+    justify-content: flex-start;
+  }
+
+  .main-footer__center { order: 2; margin-top: 6px; justify-content: center; }
+  .main-footer__right { order: 3; justify-content: center; }
+}
 
 
 @media screen and (max-width: 640px) {
