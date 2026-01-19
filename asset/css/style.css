@@ -3868,7 +3868,7 @@ body{ padding-bottom: var(--footer-height); }
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
-  gap: 10px;
+  gap: 20px;
   white-space: nowrap;
 }
 
@@ -3905,5 +3905,9 @@ body{ padding-bottom: var(--footer-height); }
 @media screen and (max-width: 640px) {
     .page-layout-normal .block-layout-alignment-block-right, .page-layout-normal .block-layout-alignment-block-left {
         max-width: 40%
+    }
+
+    .footer-partners {
+        display: none;
     }
 }
