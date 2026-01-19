@@ -41,33 +41,44 @@ foreach ( $socialNetworks as $social_network ) {
 
 	<!-- <hr class="alignfull"> -->
 
-	<!-- Footer Bottom -->
-	<div class="main-footer__bottom">
-		<div class="container main-footer__bottom-container <?php echo $hasSocialNetworks ? 'has-social-networks' : ''; ?>">
+	<!-- Footer Bottom (custom) -->
+<div class="main-footer__bottom">
+  <div class="container main-footer__bottom-container">
 
-			<!-- Social Networks -->
-			<?php if ($hasSocialNetworks) : ?>
-				<div class="main-footer__social-network">
-					<?php foreach ( $socialNetworks as $social_network ) : ?>
-						<?php if ( $social_network_url = $this->themeSetting( "{$social_network}_url" ) ) : ?>
-							<a href="<?php echo $social_network_url; ?>">
-								<img src="<?php echo $this->assetUrl( "img/{$social_network}.svg" ); ?>"
-									alt="<?php echo $escAttr( $social_network ); ?>">
-							</a>
-						<?php endif; ?>
-					<?php endforeach; ?>
-				</div>
-			<?php endif; ?>
+    <div class="main-footer__left">
+      <!-- Column 1 -->
+      <ul class="footer-links footer-links--col">
+        <li><a href="/om-forlaget">OM FÖRLAGET</a></li>
+        <li><a href="/om-tiden">OM TIDEN</a></li>
+        <li><a href="/om-utgivningen">OM UTGIVNINGEN</a></li>
+      </ul>
 
-			<!-- Copyright -->
-			<div class="main-footer__copyright">
-				<?php if ( $footer_copyright = $this->themeSetting( 'footer_copyright' ) ) : ?>
-					<?php echo $footer_copyright; ?>
-				<?php else: ?>
-					<?php echo $this->translate( 'Powered by Omeka S' ); ?>
-				<?php endif; ?>
-			</div>
-		</div>
-	</div>
+      <!-- Column 2 -->
+      <ul class="footer-links footer-links--col">
+        <li><a href="/om-publikationsserierna">OM PUBLIKATIONSSERIERNA</a></li>
+        <li><a href="/om-arkivmaterialet">OM ARKIVMATERIALET</a></li>
+        <li><a href="/om-oss">OM OSS</a></li>
+      </ul>
+    </div>
+
+    <div class="main-footer__center" role="contentinfo" aria-label="Footer brand">
+      <div class="footer-brand">
+        <span class="footer-brand__text">
+			<a href="https://www.barnboksinstitutet.se/">SVENSKA BARNBOKSINSTITUTET</span>
+      </div>
+    </div>
+
+    <div class="main-footer__right">
+      <nav class="footer-partners" aria-label="Partner links">
+        <a href="https://www.gu.se/litteratur-idehistoria-religion">LIR</a>
+        <span class="pipe">|</span>
+        <a href="https://dh.gu.se/">GRIDH</a>
+        <!-- <span class="pipe">|</span>
+        <a href="https://example.org/another">ANNAT</a> -->
+      </nav>
+    </div>
+
+  </div>
+</div>
 
 </footer>
