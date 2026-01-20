@@ -3793,7 +3793,7 @@ body.search .results .resource__content {
 /* === Footer: fixed & style === */
 
 :root{
-  --footer-height: 91px;     /* adjust if needed */
+  --footer-height: 91px;     
   --footer-bg: var(--primary);
   --footer-text: #fff;
 }
@@ -3809,6 +3809,7 @@ body.search .results .resource__content {
   display: flex;
   align-items: center;
   margin: 0;
+  font-family: "Barlow Condensed", sans-serif;
 }
 
 body{ padding-bottom: var(--footer-height); }
@@ -3831,7 +3832,7 @@ body{ padding-bottom: var(--footer-height); }
 /* left: 3 columns of stacked links */
 .main-footer__left{
   display: flex;
-  gap: 22px;          /* space between columns */
+  gap: 22px;          
   align-items: center;
   flex: 0 0 auto;
 }
@@ -3850,7 +3851,7 @@ body{ padding-bottom: var(--footer-height); }
 .footer-links a{
   color: rgba(255,255,255,0.95);
   text-decoration: none;
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1;
   display: inline-block;
 }
@@ -3868,7 +3869,7 @@ body{ padding-bottom: var(--footer-height); }
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
-  gap: 20px;
+  gap: 28px;
   white-space: nowrap;
 }
 
@@ -3876,11 +3877,11 @@ body{ padding-bottom: var(--footer-height); }
   color: rgba(255,255,255,0.95);
   text-decoration: none;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 32px;
 }
 
 .footer-partners .pipe{
-  font-size: 24px;
+  font-size: 32px;
 }
 
 /* mobile: let it wrap and increase footer height */
