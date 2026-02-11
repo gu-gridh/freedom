@@ -3642,10 +3642,6 @@ body.search .results .resource__content {
   display: flex;
 }
 
-/* Optional: hover styling */
-.main-navigation__container ul ul li:hover {
-  background-color: #f0f0f0;
-}
 
 .main-navigation__container ul ul {
   display: block !important;
