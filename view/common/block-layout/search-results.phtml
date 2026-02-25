@@ -78,7 +78,9 @@ $layout = $_GET['layout'] ?? 'grid';
         ?>
         <li class="<?= $resourceType ?> item-card resource">
             <?php if ($showThumbnail): ?>
+                <div class="image-container">
             <?= $resource->linkRaw($thumbnail($resource, 'medium', ['title' => $heading])) ?>
+            </div>
             <?php endif; ?>
             <?php if ($showHeading && $heading): ?>
             <h4><span class="resource-name"><?= $resource->linkRaw($heading, null, ['class' => 'resource-link']) ?></span></h4>
