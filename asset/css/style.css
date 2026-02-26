@@ -1060,7 +1060,7 @@ body.main-header--center {
 
 .main-header {
     background-color: #fff;
-    position: fixed;
+    /* position: fixed; */
     width: 100%;
     top: 0;
     left: 0;
