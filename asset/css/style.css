@@ -3721,12 +3721,6 @@ body.search .results .resource__content {
     
 }
 
-.resource-list .item-card img {
-    max-height: 150px;
-    width: auto;
-    clip-path: inset(5px 8px 8px 5px);
-}
-
 .resource-link {
     color:#93272c;
     text-decoration: none;
