@@ -56,16 +56,7 @@ $decoration = $this->themeSetting('image_decoration');
                 <!-- Metadata -->
                 <div class="metadata">
                     <?php echo $item->displayValues($options); ?>
-                    <?php if($item->itemSets()): ?>
-                        <dl class="item-sets">
-                            <div class="property">
-                                <dt><?php echo $translate('Item sets'); ?></dt>
-                                <?php foreach ($item->itemSets() as $itemSet): ?>
-                                <dd class="value"><?php echo $itemSet->link($itemSet->displayTitle()); ?></dd>
-                                <?php endforeach; ?>
-                            </div>
-                        </dl>
-                    <?php endif; ?>
+                    
                     <?php if($item->media()): ?>
                         <dl class="media-list">
                             <div class="property">
