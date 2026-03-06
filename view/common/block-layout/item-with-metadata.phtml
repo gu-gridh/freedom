@@ -43,8 +43,8 @@ $decoration = $this->themeSetting('image_decoration');
                 <h3 class="item-with-metadata__heading"><?php echo $title; ?></h3>
             </div>
 
-            <!-- Content -->
-            <div class="item-with-metadata__content">
+            <!-- Content Kicki har ändrat här-->
+            <div class="item-with-metadata__content <?php echo $primaryMedia ? 'has-media' : 'no-media'; ?>">
 
                 <!-- Thumbnail -->
                 <?php if ($primaryMedia): ?>
