@@ -106,10 +106,84 @@ const freedomScripts = () => {
                 }
             }
         }
-        // Ajax page loader (only for selected pages)
+
+//TEST
+const ajaxPages = () => {
+    console.log('Current path:', window.location.pathname);
+
+    const allowedPaths = [
+        '/utgivningen',
+        '/s/saga/utgivningen',
+    ];
+
+    if (!allowedPaths.includes(window.location.pathname)) {
+        console.log('Not an allowed page');
+        return;
+    }
+
+    const htmlBlock = document.querySelector('.block-html');
+    if (!htmlBlock) {
+        console.log('No .block-html found');
+        return;
+    }
+
+    const divs = htmlBlock.querySelectorAll(':scope > div');
+    if (divs.length < 2) {
+        console.log('Expected at least 2 divs in .block-html');
+        return;
+    }
+
+    const menuDiv = divs[0];
+    const contentDiv = divs[1];
+    const links = menuDiv.querySelectorAll('a');
+
+    links.forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const url = this.href;
+            console.log('Fetching:', url);
+
+            fetch(url)
+                .then(response => {
+                    console.log('Response status:', response.status, response.url);
+                    if (!response.ok) {
+                        throw new Error('HTTP ' + response.status);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+
+                    console.log('Loaded title:', doc.title);
+
+                    const pageContent =
+                        doc.querySelector('main') ||
+                        doc.querySelector('#content') ||
+                        doc.querySelector('.site-page');
+
+                    if (!pageContent) {
+                        throw new Error('Could not find page content in fetched HTML');
+                    }
+
+                    contentDiv.innerHTML = pageContent.innerHTML;
+                })
+                .catch(error => {
+                    console.error('AJAX load failed:', error);
+                    contentDiv.innerHTML = '<p>Kunde inte ladda sidan.</p>';
+                });
+        });
+    });
+};
+
+ajaxPages();
+
+// Ajax page loader (only for selected pages)
 
 const allowedPaths = [
-    '/utgivningen' 
+    '/utgivningen',
+    '/s/saga/utgivningen', 
 ];
 
 if (allowedPaths.includes(window.location.pathname)) {
