@@ -106,122 +106,62 @@ const freedomScripts = () => {
                 }
             }
         }
-
-//TEST
-const ajaxPages = () => {
-    console.log('Current path:', window.location.pathname);
-
-    const allowedPaths = [
-        '/utgivningen',
-        '/s/saga/utgivningen',
-    ];
-
-    if (!allowedPaths.includes(window.location.pathname)) {
-        console.log('Not an allowed page');
-        return;
-    }
-
-    const htmlBlock = document.querySelector('.block-html');
-    if (!htmlBlock) {
-        console.log('No .block-html found');
-        return;
-    }
-
-    const divs = htmlBlock.querySelectorAll(':scope > div');
-    if (divs.length < 2) {
-        console.log('Expected at least 2 divs in .block-html');
-        return;
-    }
-
-    const menuDiv = divs[0];
-    const contentDiv = divs[1];
-    const links = menuDiv.querySelectorAll('a');
-
-    links.forEach(link => {
-        link.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            const url = this.href;
-            console.log('Fetching:', url);
-
-            fetch(url)
-                .then(response => {
-                    console.log('Response status:', response.status, response.url);
-                    if (!response.ok) {
-                        throw new Error('HTTP ' + response.status);
-                    }
-                    return response.text();
-                })
-                .then(html => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-
-                    console.log('Loaded title:', doc.title);
-
-                    const pageContent =
-                        doc.querySelector('main') ||
-                        doc.querySelector('#content') ||
-                        doc.querySelector('.site-page');
-
-                    if (!pageContent) {
-                        throw new Error('Could not find page content in fetched HTML');
-                    }
-
-                    contentDiv.innerHTML = pageContent.innerHTML;
-                })
-                .catch(error => {
-                    console.error('AJAX load failed:', error);
-                    contentDiv.innerHTML = '<p>Kunde inte ladda sidan.</p>';
-                });
-        });
-    });
-};
-
-ajaxPages();
-
-// Ajax page loader (only for selected pages)
-
-const allowedPaths = [
+        const allowedPaths = [
     '/utgivningen',
-    '/s/saga/utgivningen', 
+    '/s/saga/utgivningen',
+];
+const allowedAjaxUrls = [
+    'https://saga.dh.gu.se/bokutgivning',
+    'https://saga.dh.gu.se/periodisk-utgivning',
+    'https://saga.dh.gu.se/genreindelningar'
 ];
 
 if (allowedPaths.includes(window.location.pathname)) {
-
     const htmlBlock = document.querySelector('.block-html');
 
     if (htmlBlock) {
+        const directDivs = htmlBlock.querySelectorAll(':scope > div');
 
-        const links = htmlBlock.querySelectorAll('a');
-        const content = htmlBlock.querySelector('div:last-child');
+        if (directDivs.length >= 2) {
+            const menuDiv = directDivs[0];
+            const contentDiv = directDivs[1];
+            const menuLinks = menuDiv.querySelectorAll('a');
 
-        links.forEach(link => {
+            menuLinks.forEach(link => {
+                if (!allowedAjaxUrls.includes(link.href)) return;
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
 
-            link.addEventListener('click', function(e) {
+                    fetch(this.href)
+                        .then(r => {
+                            if (!r.ok) {
+                                throw new Error(`HTTP ${r.status}`);
+                            }
+                            return r.text();
+                        })
+                        .then(html => {
+                            const parser = new DOMParser();
+                            const doc = parser.parseFromString(html, 'text/html');
 
-                e.preventDefault();
+                            const pageContent =
+                                doc.querySelector('main') ||
+                                doc.querySelector('#content') ||
+                                doc.querySelector('.site-page');
 
-                fetch(this.href)
-                    .then(r => r.text())
-                    .then(html => {
-
-                        const parser = new DOMParser();
-                        const doc = parser.parseFromString(html, "text/html");
-
-                        const pageContent = doc.querySelector('main');
-
-                        if (pageContent && content) {
-                            content.innerHTML = pageContent.innerHTML;
-                        }
-
-                    });
-
+                            if (pageContent) {
+                                contentDiv.innerHTML = pageContent.innerHTML;
+                            } else {
+                                contentDiv.innerHTML = '<p>Kunde inte hitta innehållet på sidan.</p>';
+                            }
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            contentDiv.innerHTML = '<p>Kunde inte ladda sidan.</p>';
+                        });
+                });
             });
-
-        });
-
+        }
     }
-
 }
     });
 }
