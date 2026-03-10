@@ -106,6 +106,49 @@ const freedomScripts = () => {
                 }
             }
         }
+        // Ajax page loader (only for selected pages)
+
+const allowedPaths = [
+    '/utgivningen' 
+];
+
+if (allowedPaths.includes(window.location.pathname)) {
+
+    const htmlBlock = document.querySelector('.block-html');
+
+    if (htmlBlock) {
+
+        const links = htmlBlock.querySelectorAll('a');
+        const content = htmlBlock.querySelector('div:last-child');
+
+        links.forEach(link => {
+
+            link.addEventListener('click', function(e) {
+
+                e.preventDefault();
+
+                fetch(this.href)
+                    .then(r => r.text())
+                    .then(html => {
+
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, "text/html");
+
+                        const pageContent = doc.querySelector('main');
+
+                        if (pageContent && content) {
+                            content.innerHTML = pageContent.innerHTML;
+                        }
+
+                    });
+
+            });
+
+        });
+
+    }
+
+}
     });
 }
 
