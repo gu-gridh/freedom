@@ -106,63 +106,7 @@ const freedomScripts = () => {
                 }
             }
         }
-        const allowedPaths = [
-    '/utgivningen',
-    '/s/saga/utgivningen',
-];
-const allowedAjaxUrls = [
-    'https://saga.dh.gu.se/bokutgivning',
-    'https://saga.dh.gu.se/periodisk-utgivning',
-    'https://saga.dh.gu.se/genreindelningar'
-];
-
-if (allowedPaths.includes(window.location.pathname)) {
-    const htmlBlock = document.querySelector('.block-html');
-
-    if (htmlBlock) {
-        const directDivs = htmlBlock.querySelectorAll(':scope > div');
-
-        if (directDivs.length >= 2) {
-            const menuDiv = directDivs[0];
-            const contentDiv = directDivs[1];
-            const menuLinks = menuDiv.querySelectorAll('a');
-
-            menuLinks.forEach(link => {
-                if (!allowedAjaxUrls.includes(link.href)) return;
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-
-                    fetch(this.href)
-                        .then(r => {
-                            if (!r.ok) {
-                                throw new Error(`HTTP ${r.status}`);
-                            }
-                            return r.text();
-                        })
-                        .then(html => {
-                            const parser = new DOMParser();
-                            const doc = parser.parseFromString(html, 'text/html');
-
-                            const pageContent =
-                                doc.querySelector('main') ||
-                                doc.querySelector('#content') ||
-                                doc.querySelector('.site-page');
-
-                            if (pageContent) {
-                                contentDiv.innerHTML = pageContent.innerHTML;
-                            } else {
-                                contentDiv.innerHTML = '<p>Kunde inte hitta innehållet på sidan.</p>';
-                            }
-                        })
-                        .catch(error => {
-                            console.error(error);
-                            contentDiv.innerHTML = '<p>Kunde inte ladda sidan.</p>';
-                        });
-                });
-            });
-        }
-    }
-}
+        
     });
 }
 
