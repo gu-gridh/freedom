@@ -12,10 +12,7 @@ $subjectValues = $resource->displaySubjectValues($options);
 <?php if ($subjectValues): ?>
     
 <div id="resources-linked" class="resources-linked">
-    <div class="resources-linked__header">
-        <h3 class="resources-linked__heading"><?php echo $this->translate('Linked resources'); ?></h3>
-        <button class="resources-linked__expand-collapse-btn">Expand all</button>
-    </div>
+    
     <?php echo $subjectValues; ?>
 </div>
 <?php endif; ?>
