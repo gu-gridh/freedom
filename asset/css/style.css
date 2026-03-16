@@ -2418,7 +2418,7 @@ body.menu-drawer-toggled {
 .item-with-metadata__content {
     display: flex;
     align-items: center;
-    border: 1px solid #ececec;
+
     border-top: none;
     flex-direction: column;
     flex-wrap: wrap;
