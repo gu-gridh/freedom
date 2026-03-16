@@ -549,7 +549,7 @@ table {
 
 .title {
     display: block;
-    border-bottom: 1px solid #ececec;
+    
     padding-bottom: 1rem;
     position: relative;
     width: 100%
@@ -979,7 +979,7 @@ body.main-header--center {
     gap: 60px;
     margin-bottom: 3rem;
     padding-bottom: 50px;
-    border-bottom: 1px solid #ececec
+    
 }
 
 @media(min-width: 768px) {
@@ -1548,7 +1548,7 @@ body.menu-drawer-toggled {
 
 .accordion__container {
     background-color: #fff;
-    border: 1px solid #ececec;
+    
     margin-bottom: 1rem
 }
 
@@ -1558,7 +1558,7 @@ body.menu-drawer-toggled {
 
 .accordion__trigger {
     background: none;
-    border-bottom: 1px solid #ececec;
+    
     color: #333;
     font-size: 1.125rem;
     outline: none;
@@ -1587,7 +1587,7 @@ body.menu-drawer-toggled {
 .accordion__icon {
     display: flex;
     align-items: center;
-    border: 1px solid #ececec;
+    
     border-radius: 50%;
     height: 34px;
     justify-content: center;
@@ -1605,10 +1605,10 @@ body.menu-drawer-toggled {
 }
 
 .accordion__panel {
-    max-height: 0;
-    overflow: hidden;
+/*     max-height: 0;
+    overflow: hidden; */
     padding: 0 25px;
-    transition: max-height .4s ease-out
+    /* transition: max-height .4s ease-out */
 }
 
 #advanced-search {
@@ -2099,7 +2099,7 @@ body.menu-drawer-toggled {
     flex-direction: column-reverse;
     justify-content: space-between;
     padding: .7rem 0;
-    border-bottom: 1px solid #ececec
+    
 }
 
 @media(min-width: 1024px) {
@@ -2215,7 +2215,7 @@ body.menu-drawer-toggled {
 }
 
 .metadata .media-list dd {
-    border: 1px solid #ececec;
+    
     margin-bottom: 1rem !important
 }
 
@@ -2389,7 +2389,7 @@ body.menu-drawer-toggled {
 }
 
 .item-with-metadata__header {
-    border: 1px solid #ececec;
+    
     border-left: none;
     padding: 15px;
     position: relative;
