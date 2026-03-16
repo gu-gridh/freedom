@@ -62,8 +62,7 @@ $resourcePropertiesSelect->setValueOptions($valueOptions);
     <?php
     // Build the accordion caption.
     $caption = sprintf(
-        $this->translate('%s: %s'),
-        $this->translate($labelMap[$resourceType]),
+        $this->translate('%s %s'),
         $values[0]['property_alternate_label'] 
             ?? $this->translate($values[0]['property_label']),
         $objectResource->displayTitle()
