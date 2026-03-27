@@ -4677,6 +4677,14 @@ border: none !important;
   .site-page-start .about-first {
     padding: 60px 0 100px; /* slightly smaller hero on mobile */
   }
+  .site-page .block {
+    grid-column: 1 / -1 !important; 
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  .site-page .about-first {
+    padding: 60px 0 100px; 
+  }
 h1 {
 font-size: 2rem;
 }
@@ -4688,9 +4696,7 @@ padding: 10px;
     padding-right: 5px !important;
 max-width: 100% !important;
 }
-.main-region .metadata{
-    grid-template-columns: 1fr !important;
-  }
+
 .main-header__site-title img {
 max-height: 50px;
 }
