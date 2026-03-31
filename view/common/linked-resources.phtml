@@ -50,6 +50,7 @@ foreach ($resourcePropertiesAll as $type => $resourceProperties) {
     }
 }
 $resourcePropertiesSelect->setValueOptions($valueOptions);
+$currentResourceTemplate = $objectResource->displayResourceTemplateLabel();
 ?>
 
 <div id="linked-resources">
@@ -60,13 +61,34 @@ $resourcePropertiesSelect->setValueOptions($valueOptions);
 
   <?php foreach ($subjectValues as $values): ?>
     <?php
-    // Build the accordion caption.
-    $caption = sprintf(
+    // Fix headings for now
+    if ($currentResourceTemplate == "Verk") {
+      if ($values[0]['property_label'] == "Is Part Of")
+      {
+       $caption = "Utgåvor";
+      } elseif ($values[0]['property_label'] == "has or had subject") {
+        $caption = "Arkivmaterial";
+      }
+      else {
+        $caption = $this->translate($values[0]['property_label']);
+      }
+    } elseif ($currentResourceTemplate == "Utgåva") {
+      if ($values[0]['property_label'] == "Is Part Of")
+      {
+       $caption = "Texter i utgåvan";
+      }
+      else {
+        $caption = $this->translate($values[0]['property_label']);
+      }
+    } else {
+       // Build the accordion caption.
+       $caption = sprintf(
         $this->translate('%s %s'),
         $values[0]['property_alternate_label'] 
             ?? $this->translate($values[0]['property_label']),
         $objectResource->displayTitle()
-    );
+       );
+    }
     ?>
 
     <div class="linked-resource-accordion accordion__container">
