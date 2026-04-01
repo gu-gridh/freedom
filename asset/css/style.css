@@ -4186,12 +4186,6 @@ box-shadow: 0px;
 text-align: center;
   }
 
-  /* Remove default text spacing */
-  .site-page-start
-  .block.block-html.grid-position-3.grid-span-4 * {
-    margin: 0 !important;
-  }
-
   /* Image block (position 7, span 4) */
   .site-page-start
   .block.block-asset.grid-position-7.grid-span-4 {
