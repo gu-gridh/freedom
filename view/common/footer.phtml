@@ -46,20 +46,7 @@ foreach ( $socialNetworks as $social_network ) {
   <div class="container main-footer__bottom-container">
 
     <div class="main-footer__left">
-      <ul class="footer-links footer-links--col">
-        <li><a href="/foerlaget">OM FÖRLAGET</a></li>
-        <li><a href="/tiden">OM TIDEN</a></li>
-      </ul>
-
-      <ul class="footer-links footer-links--col">
-        <li><a href="/utgivningen">OM UTGIVNINGEN</a></li>
-        <li><a href="/om-publikationsserierna">OM PUBLIKATIONSSERIERNA</a></li>
-      </ul>
-
-      <ul class="footer-links footer-links--col">
-        <li><a href="/om-arkivet">OM ARKIVMATERIALET</a></li>
-        <li><a href="/om-oss">OM OSS</a></li>
-      </ul>
+    <?= $this->navMenu('footer', ['ulClass' => 'footer-links footer-links--col']); ?>
     </div>
 
     <div class="main-footer__right">
