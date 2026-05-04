@@ -1,4 +1,9 @@
+
+
 <?php
+$site = $this->currentSite();
+
+$siteTitle = $site ? $site->title() : $this->setting('installation_title', 'Omeka S');
 $siteTitle = $site->title();
 $userBar = $this->userBar();
 $header_layout = ($this->themeSetting('header_layout')) ?? 'inline';
