@@ -1,5 +1,13 @@
 const freedomScripts = () => {
 
+    // Restore scroll position after reload - test
+    const savedScroll = sessionStorage.getItem('scrollY');
+
+    if (savedScroll !== null) {
+        window.scrollTo(0, parseInt(savedScroll, 10));
+        sessionStorage.removeItem('scrollY');
+    }
+
     const body = document.body;
     const mainHeader = document.querySelector('.main-header');
     const mainHeaderTopBar = document.querySelector('.main-header__top-bar');
@@ -107,6 +115,29 @@ const freedomScripts = () => {
             }
         }
         
+    });
+
+    // AdvancedSearch: update results when clearing search + no scroll position change on search
+    document.addEventListener('input', function (e) {
+        const target = e.target;
+        if (target.matches('input[type="search"]') && target.value === '' && window.location.search) {
+            const url = new URL(window.location.href);
+            url.searchParams.delete(target.name || 'q');
+            url.searchParams.delete('page');
+            sessionStorage.setItem('scrollY', window.scrollY);
+            window.location.href = url.toString();
+        }
+    });
+
+    document.addEventListener('search', function (e) {
+        const target = e.target;
+        if (target.matches('input[type="search"]') && target.value === '' && window.location.search) {
+            const url = new URL(window.location.href);
+            url.searchParams.delete(target.name || 'q');
+            url.searchParams.delete('page');
+            sessionStorage.setItem('scrollY', window.scrollY);
+            window.location.href = url.toString();
+        }
     });
 }
 
