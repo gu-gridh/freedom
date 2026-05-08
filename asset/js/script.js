@@ -1,7 +1,7 @@
 const freedomScripts = () => {
     const body = document.body;
     const mainHeader = document.querySelector('.main-header');
-    const mainHeaderTopBar = document.querySelector('.main-header__top-bar');
+    const mainHeaderTopBar = null;
     const mainHeaderMainBar = document.querySelector('.main-header__main-bar');
     const menuDrawer = document.getElementById('menu-drawer');
     const userBar = document.getElementById('user-bar');
@@ -109,12 +109,14 @@ const freedomScripts = () => {
     onScroll();
 
     function onScroll(scrollPos = window.scrollY) {
-        if (!mainHeader || !mainHeaderTopBar || !mainHeaderMainBar || !menuDrawer) {
+        if (!mainHeader || !mainHeaderMainBar || !menuDrawer) {
             return;
         }
 
+        const topBarHeight = mainHeaderTopBar ? mainHeaderTopBar.offsetHeight : 0;
+
         if (scrollPos > 60 && scrollDirection === 'down') {
-            mainHeader.style.top = -(userBarHeight + mainHeaderTopBar.offsetHeight) + 'px';
+            mainHeader.style.top = mainHeader.style.top = -userBarHeight + 'px';
             menuDrawer.style.top = mainHeaderMainBar.offsetHeight + 'px';
             menuDrawer.style.height = 'calc(100% - ' + mainHeaderMainBar.offsetHeight + 'px)';
         } else {
