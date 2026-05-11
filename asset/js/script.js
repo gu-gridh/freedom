@@ -1,3 +1,17 @@
+// Save scroll before leaving page
+window.addEventListener('beforeunload', function () {
+    sessionStorage.setItem('globalScrollY', window.scrollY);
+});
+
+// Restore scroll after load
+window.addEventListener('load', function () {
+    const y = sessionStorage.getItem('globalScrollY');
+    if (y !== null) {
+        window.scrollTo(0, parseInt(y, 10));
+        sessionStorage.removeItem('globalScrollY');
+    }
+});
+
 const freedomScripts = () => {
     const body = document.body;
     const mainHeader = document.querySelector('.main-header');
@@ -32,11 +46,9 @@ const freedomScripts = () => {
         if (!target.matches('input[type="search"], input[name="q"], input.search-query')) {
             return;
         }
-
         if (target.value !== '') {
             return;
         }
-
         const form = target.closest('form');
 
         if (form && form.classList.contains('facets-form')) {
@@ -53,21 +65,41 @@ const freedomScripts = () => {
         handleSearchClear(e.target);
     });
 
-    // AdvancedSearch / Chosen: submit when a select filter is cleared or changed
-    document.addEventListener('change', function (e) {
-        const target = e.target;
+    // AdvancedSearch / multi-select fix
+    $(document).on('change', '#search-facets select.chosen-select', function (event) {
+        event.stopImmediatePropagation();
 
-        if (!target.matches('select')) {
-            return;
+        const facet = $(this);
+        const selectValues = facet.val();
+
+        const url = new URL(window.location.href);
+        const selectName = facet.prop('name');
+
+        const baseName = selectName.endsWith('[]')
+            ? selectName.substring(0, selectName.length - 2)
+            : selectName;
+
+        // Remove old facet params
+        Array.from(url.searchParams.keys()).forEach((key) => {
+            if (
+                key === baseName ||
+                key === baseName + '[]' ||
+                key.startsWith(baseName + '[')
+            ) {
+                url.searchParams.delete(key);
+            }
+        });
+
+        // Re-add current values
+        if (Array.isArray(selectValues)) {
+            selectValues.forEach((value, index) => {
+                url.searchParams.set(baseName + '[' + index + ']', value);
+            });
         }
-
-        const form = target.closest('form');
-
-        if (form) {
-            saveScrollPosition();
-            form.submit();
-        }
+        saveScrollPosition();
+        window.location.href = url.toString();
     });
+
 
     // Resize Events
     let userBarHeight = 0;
@@ -116,7 +148,7 @@ const freedomScripts = () => {
         const topBarHeight = mainHeaderTopBar ? mainHeaderTopBar.offsetHeight : 0;
 
         if (scrollPos > 60 && scrollDirection === 'down') {
-            mainHeader.style.top = mainHeader.style.top = -userBarHeight + 'px';
+            mainHeader.style.top = -userBarHeight + 'px';
             menuDrawer.style.top = mainHeaderMainBar.offsetHeight + 'px';
             menuDrawer.style.height = 'calc(100% - ' + mainHeaderMainBar.offsetHeight + 'px)';
         } else {
