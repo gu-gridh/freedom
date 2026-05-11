@@ -4,13 +4,13 @@ $sortedMedia = $this->sortMedia($itemMedia);
 $lightMedia = (isset($sortedMedia['lightMedia'])) ? $sortedMedia['lightMedia'] : null;
 $otherMedia = (isset($sortedMedia['otherMedia'])) ? $sortedMedia['otherMedia'] : null;
 // filter out iiif from other media
-$otherMedia = array_filter($otherMedia, function ($media) {
+$otherMedia = (isset($otherMedia)) ? array_filter($otherMedia, function ($media) {
     $renderer = $media->renderer();
 
     return !(
-        stripos($renderer, 'iiif') !== false 
+        stripos($renderer, 'iiif') !== false
     );
-});
+}) : null;
 ?>
 <?php echo $this->lightGalleryOutput($lightMedia); ?>
 <?php if (isset($otherMedia) && (count($otherMedia) > 0)): ?>
