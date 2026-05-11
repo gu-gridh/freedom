@@ -100,6 +100,45 @@ const freedomScripts = () => {
         window.location.href = url.toString();
     });
 
+    //for the search bar
+    $(document).on('search', 'input[type="search"]', function () {
+        const input = $(this);
+        if (input.val() !== '') {
+            return;
+        }
+
+        const form = input.closest('form');
+
+        if (!form.length) {
+            return;
+        }
+
+        saveScrollPosition();
+        // Remove q parameter manually for clean URL
+        const url = new URL(window.location.href);
+        url.searchParams.delete(input.attr('name') || 'q');
+        url.searchParams.delete('page');
+        window.location.href = url.toString();
+    });
+
+    //for firefox search clear button
+    $(document).on('input', 'input[type="search"]', function () {
+        const input = $(this);
+
+        if (input.val() !== '') {
+            return;
+        }
+        const form = input.closest('form');
+        if (!form.length) {
+            return;
+        }
+        saveScrollPosition();
+        const url = new URL(window.location.href);
+        url.searchParams.delete(input.attr('name') || 'q');
+        url.searchParams.delete('page');
+        window.location.href = url.toString();
+    });
+
 
     // Resize Events
     let userBarHeight = 0;
