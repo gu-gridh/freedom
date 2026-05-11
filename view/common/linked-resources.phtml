@@ -80,6 +80,14 @@ $currentResourceTemplate = $objectResource->displayResourceTemplateLabel();
       else {
         $caption = $this->translate($values[0]['property_label']);
       }
+    } elseif ($currentResourceTemplate == "Bild") {
+        if ($values[0]['property_label'] == "has illustrations")
+        {
+         $caption = "Illustrationen är med i";
+        }
+        else {
+          $caption = $this->translate($values[0]['property_label']);
+        }
     } else {
        // Build the accordion caption.
        $caption = sprintf(
