@@ -139,6 +139,26 @@ const freedomScripts = () => {
         window.location.href = url.toString();
     });
 
+    //range slider
+    $(document).on('click', '.range-double-submit', function (e) {
+        e.preventDefault();
+        const rangeDouble = $(this).closest('.range-double');
+        const fromInput = rangeDouble.find('.range-numeric-from');
+        const toInput = rangeDouble.find('.range-numeric-to');
+        const url = new URL(window.location.href);
+        const fromName = fromInput.attr('name');
+        const toName = toInput.attr('name');
+        if (fromName) {
+            url.searchParams.set(fromName, fromInput.val());
+        }
+        if (toName) {
+            url.searchParams.set(toName, toInput.val());
+        }
+
+        url.searchParams.delete('page');
+        sessionStorage.setItem('scrollY', window.scrollY);
+        window.location.href = url.toString();
+    });
 
     // Resize Events
     let userBarHeight = 0;
