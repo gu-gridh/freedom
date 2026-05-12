@@ -140,25 +140,36 @@ const freedomScripts = () => {
     });
 
     //range slider
-    $(document).on('click', '.range-double-submit', function (e) {
+    document.addEventListener('click', function (e) {
+        const button = e.target.closest('.range-double-submit');
+        if (!button) {
+            return;
+        }
         e.preventDefault();
-        const rangeDouble = $(this).closest('.range-double');
-        const fromInput = rangeDouble.find('.range-numeric-from');
-        const toInput = rangeDouble.find('.range-numeric-to');
+        e.stopImmediatePropagation();
+        const rangeDouble = button.closest('.range-double');
+        if (!rangeDouble) {
+            return;
+        }
+        const fromNumeric = rangeDouble.querySelector('.range-numeric-from');
+        const toNumeric = rangeDouble.querySelector('.range-numeric-to');
+        const fromSlider = rangeDouble.querySelector('.range-slider-from');
+        const toSlider = rangeDouble.querySelector('.range-slider-to');
+        const fromName = fromSlider ? fromSlider.getAttribute('name') : null;
+        const toName = toSlider ? toSlider.getAttribute('name') : null;
+        const fromValue = fromNumeric ? fromNumeric.value : fromSlider.value;
+        const toValue = toNumeric ? toNumeric.value : toSlider.value;
         const url = new URL(window.location.href);
-        const fromName = fromInput.attr('name');
-        const toName = toInput.attr('name');
         if (fromName) {
-            url.searchParams.set(fromName, fromInput.val());
+            url.searchParams.set(fromName, fromValue);
         }
         if (toName) {
-            url.searchParams.set(toName, toInput.val());
+            url.searchParams.set(toName, toValue);
         }
-
         url.searchParams.delete('page');
         sessionStorage.setItem('scrollY', window.scrollY);
         window.location.href = url.toString();
-    });
+    }, true);
 
     // Resize Events
     let userBarHeight = 0;
