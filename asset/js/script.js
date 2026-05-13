@@ -42,7 +42,6 @@ const freedomScripts = () => {
 
     // AdvancedSearch: clear normal search input with native "x"
     function handleSearchClear(target) {
-        console.log('Input event on:', target);
         if (!target.matches('input[type="search"], input[name="q"], input.search-query')) {
             return;
         }
