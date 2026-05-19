@@ -122,8 +122,12 @@ $currentResourceTemplate = $objectResource->displayResourceTemplateLabel();
         <?php foreach ($uniqueResources as $resource): ?>
           <?php
           $issued = null;
+          $title = $resource->displayTitle();
 
-          if (method_exists($resource, 'value')) {
+          // Checks if title already contains a year
+          $titleAlreadyHasYear = preg_match('/\(\s*\d{4}\s*\)/', $title);
+
+          if (!$titleAlreadyHasYear && method_exists($resource, 'value')) {
               try {
                   $issued = $resource->value('dcterms:issued');
               } catch (\Throwable $e) {
@@ -137,8 +141,8 @@ $currentResourceTemplate = $objectResource->displayResourceTemplateLabel();
               <?php echo $resource->linkPretty('medium', null, null, null, $valueLang); ?>
 
               <?php if ($issued): ?>
-                <span class="linked-resource-issued">
-                  <?php echo $this->escapeHtml($issued->asHtml()); ?>
+                <span class="linked-resource-issued">(
+                  <?php echo $this->escapeHtml($issued->asHtml()); ?>)
                 </span>
               <?php endif; ?>
             </span>
