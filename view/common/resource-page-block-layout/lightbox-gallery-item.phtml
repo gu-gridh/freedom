@@ -6,13 +6,12 @@ $otherMedia = (isset($sortedMedia['otherMedia'])) ? $sortedMedia['otherMedia'] :
 // filter out iiif from other media
 $otherMedia = (isset($otherMedia)) ? array_filter($otherMedia, function ($media) {
     $renderer = $media->renderer();
-
-    return !(
-        stripos($renderer, 'iiif') !== false
-    );
+    return !($renderer == 'iiif');
 }) : null;
 ?>
-<?php echo $this->lightGalleryOutput($lightMedia); ?>
+<?php if (isset($lightMedia) and count($lightMedia) > 1): ?>
+    <?php echo $this->lightGalleryOutput($lightMedia); ?>
+<?php endif; ?>
 <?php if (isset($otherMedia) && (count($otherMedia) > 0)): ?>
 <dl id="other-media">
     <div class="property">

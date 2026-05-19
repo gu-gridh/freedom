@@ -1,8 +1,9 @@
 <?php
 $resourceMedia = $resource->media();
 $decoration = $this->themeSetting('image_decoration');
+var_dump(count($resourceMedia));
 ?>
-<?php if ($resourceMedia): ?>
+<?php if ($resourceMedia && count($resourceMedia) == 1) : ?>
 <div class="media-embeds <?php echo is_array($decoration) && in_array('media', $decoration) ? 'decoration' : ''; ?>">
     <?php foreach ($resourceMedia as $media): ?>
     <?php echo $media->render(); ?>
