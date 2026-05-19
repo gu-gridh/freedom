@@ -141,8 +141,8 @@ $currentResourceTemplate = $objectResource->displayResourceTemplateLabel();
               <?php echo $resource->linkPretty('medium', null, null, null, $valueLang); ?>
 
               <?php if ($issued): ?>
-                <span class="linked-resource-issued">(
-                  <?php echo $this->escapeHtml($issued->asHtml()); ?>)
+                <span class="linked-resource-issued">
+                  (<?php echo $this->escapeHtml($issued->asHtml()); ?>)
                 </span>
               <?php endif; ?>
             </span>
