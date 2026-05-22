@@ -70,19 +70,19 @@ $currentResourceTemplate = $objectResource->displayResourceTemplateLabel();
         } elseif ($values[0]['property_label'] == "has or had subject") {
             $caption = "Arkivmaterial";
         } else {
-            $caption = $this->translate($values[0]['property_label']);
+            $caption = $values[0]['property_alternate_label'] ?? $this->translate($values[0]['property_label']);
         }
     } elseif ($currentResourceTemplate == "Utgåva") {
         if ($values[0]['property_label'] == "Is Part Of") {
             $caption = "Bidrag i utgåvan";
         } else {
-            $caption = $this->translate($values[0]['property_label']);
+            $caption = $values[0]['property_alternate_label'] ?? $this->translate($values[0]['property_label']);
         }
     } elseif ($currentResourceTemplate == "Bild") {
         if ($values[0]['property_label'] == "has illustrations") {
-            $caption = "Illustrationen är med i";
+            $caption = "Bilden är med i";
         } else {
-            $caption = $this->translate($values[0]['property_label']);
+            $caption = $values[0]['property_alternate_label'] ?? $this->translate($values[0]['property_label']);
         }
     } else {
         $caption = sprintf(
